@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details Form</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for a clean look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Applying the Poppins font to the whole page */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Custom styles for better form appearance */
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            ring: 2px;
+            ring-color: #3b82f6; /* blue-500 */
+            border-color: #3b82f6;
+        }
+        /* Styles for the Privacy Policy Modal */
+        .modal {
+            display: none; /* Hidden by default */
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            max-height: 80vh; /* Set a max height for scrollability */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white w-full max-w-4xl p-8 rounded-2xl shadow-lg">
+
+        <!-- Form Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Submit Your Details</h1>
+            <p class="text-gray-500 mt-2">Please fill out the form below to help us find the best opportunities for you.</p>
+        </div>
+
+        <form id="user-data-form" novalidate>
+            <!-- Personal Information Section -->
+            <div>
+                <h2 class="text-xl font-semibold text-gray-700 border-b-2 border-gray-200 pb-2 mb-6">Personal Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-600 mb-1">Full Name</label>
+                        <input type="text" id="name" name="name" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg form-input" required placeholder="e.g., Arun Kumar">
+                    </div>
+                    <div>
+                        <label for="gender" class="block text-sm font-medium text-gray-600 mb-1">Gender</label>
+                        <select id="gender" name="gender" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg form-input" required>
+                            <option value="" disabled selected>Select your gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="mobile" class="block text-sm font-medium text-gray-600 mb-1">Mobile Number</label>
+                        <input type="tel" id="mobile" name="mobile" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg form-input" required placeholder="e.g., 9876543210">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-600 mb-1">Email Address</label>
+                        <input type="email" id="email" name="email" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg form-input" required placeholder="e.g., arun.kumar@example.com">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="city" class="block text-sm font-medium text-gray-600 mb-1">Current City</label>
+                        <input type="text" id="city" name="city" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg form-input" required placeholder="e.g., Kochi, Kerala">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Educational Information Section -->
+            <div class="mt-10">
+                <h2 class="text-xl font-semibold text-gray-700 border-b-2 border-gray-200 pb-2 mb-6">Educational Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="dob" class="block text-sm font-medium text-gray-600 mb-1">Date of Birth</label>
+                        <input type="date" id="dob" name="dob" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg form-input" required>
+                    </div>
+                    <div>
+                        <label for="percentage_10th" class="block text-sm font-medium text-gray-600 mb-1">Percentage in 10th (%)</label>
+                        <input type="number" id="percentage_10th" name="percentage_10th" min="0" max="100" step="0.01" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg form-input" required placeholder="e.g., 95.5">
+                    </div>
+                    <div>
+                        <label for="percentage_12th" class="block text-sm font-medium text-gray-600 mb-1">Percentage in 12th (%)</label>
+                        <input type="number" id="percentage_12th" name="percentage_12th" min="0" max="100" step="0.01" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg form-input" required placeholder="e.g., 88">
+                    </div>
+                    <div>
+                        <label for="current_pursuing" class="block text-sm font-medium text-gray-600 mb-1">Currently Pursuing</label>
+                        <select id="current_pursuing" name="current_pursuing" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg form-input" required>
+                            <option value="" disabled selected>Select your current course</option>
+                            <option value="B.Sc">B.Sc</option>
+                            <option value="M.Sc">M.Sc</option>
+                            <option value="B.A">B.A</option>
+                            <option value="M.A">M.A</option>
+                            <option value="B.Com">B.Com</option>
+                            <option value="M.Com">M.Com</option>
+                            <option value="B.Tech">B.Tech</option>
+                            <option value="M.Tech">M.Tech</option>
+                            <option value="BBA">BBA</option>
+                            <option value="MBA">MBA</option>
+                            <option value="BCA">BCA</option>
+                            <option value="MCA">MCA</option>
+                            <option value="LLB">LLB</option>
+                            <option value="LLM">LLM</option>
+                            <option value="CMA">CMA</option>
+                            <option value="ACCA">ACCA</option>
+                            <option value="CA">CA</option>
+                            <option value="Ph.D.">Ph.D.</option>
+                            <option value="Diploma">Diploma</option>
+                            <option value="B.Ed">B.Ed</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                         <label for="stream" class="block text-sm font-medium text-gray-600 mb-1">Stream of Education</label>
+                         <input type="text" id="stream" name="stream" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg form-input" required placeholder="e.g., Computer Science, Commerce with Computer Application">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agreement and Submission -->
+            <div class="mt-8">
+                <div class="flex items-center">
+                    <input type="checkbox" id="agreement-checkbox" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                    <label for="agreement-checkbox" class="ml-2 block text-sm text-gray-900">
+                        I agree to the 
+                        <a href="#" id="privacy-policy-link" class="font-medium text-red-600 underline hover:text-red-700">privacy and policy</a> 
+                        & the given datas are true.
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Status Message Area -->
+            <div id="status-message" class="mt-4 text-center text-sm font-medium"></div>
+
+            <div class="mt-8 flex flex-col md:flex-row items-center gap-4">
+                 <a href="#" id="back-to-home" class="w-full md:w-auto text-center px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 transition-colors">
+                    Back to Home
+                 </a>
+                 <button type="submit" id="submit-btn" class="w-full md:flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
+                    Submit Details
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 p-4">
+        <div class="bg-white w-full max-w-3xl rounded-lg shadow-xl modal-content">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-5 border-b">
+                <h3 class="text-2xl font-semibold text-gray-800">Privacy Policy</h3>
+                <button id="close-modal-btn" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <!-- Modal Body -->
+            <div class="p-6 space-y-4 overflow-y-auto text-gray-600 text-sm">
+                <p><strong>Last Updated: September 01, 2025</strong></p>
+                <p>Welcome to our career development platform ("Platform"). Your privacy is critically important to us. This Privacy Policy outlines how we collect, use, protect, and handle your personal and professional information in compliance with the Information Technology Act, 2000, and the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011, of India.</p>
+                
+                <h4 class="font-semibold text-lg text-gray-700 pt-2">1. User Consent</h4>
+                <p>By submitting your personal information through our forms, you explicitly consent to the collection, use, storage, and processing of your data as described in this policy.</p>
+
+                <h4 class="font-semibold text-lg text-gray-700 pt-2">2. Information We Collect</h4>
+                <p>We collect information that you voluntarily provide to us, which is classified as Personal Information and Sensitive Personal Information. This includes:</p>
+                <ul class="list-disc list-inside pl-4 space-y-1">
+                    <li><strong>Personal Information:</strong> Name, Gender, Mobile Number, Email, Current City, Date of Birth.</li>
+                    <li><strong>Educational & Professional Information:</strong> Academic percentages, current course, stream of education, and any data derived from resumes or other documents you may upload in the future.</li>
+                </ul>
+
+                <h4 class="font-semibold text-lg text-gray-700 pt-2">3. Purpose and Usage of Information</h4>
+                <p>Your data is used exclusively to provide and enhance our career development services. The primary purposes are:</p>
+                <ul class="list-disc list-inside pl-4 space-y-1">
+                    <li><strong>Skill Gap Analysis:</strong> To programmatically analyze your profile and resume against desired job roles to identify areas for upskilling.</li>
+                    <li><strong>Personalized Recommendations:</strong> To suggest suitable jobs, certified and affordable upskilling courses, and career paths based on your qualifications and goals.</li>
+                    <li><strong>Connecting with Opportunities:</strong> To inform you about job vacancies from various employers that match your profile.</li>
+                    <li><strong>Communication:</strong> To contact you regarding your account, our services, and relevant career opportunities.</li>
+                    <li><strong>Service Improvement:</strong> To improve our platform's AI, algorithms, and overall user experience.</li>
+                </ul>
+
+                <h4 class="font-semibold text-lg text-gray-700 pt-2">4. Data Security and Storage</h4>
+                <p>We are committed to ensuring your information is secure. We implement and maintain reasonable security practices and procedures, including administrative, physical, and technical safeguards to protect your data from unauthorized access, disclosure, or alteration. Our data is securely stored and managed using Supabase's industry-standard infrastructure. We adhere to the security standards as mandated by the Indian IT Act and its rules.</p>
+
+                <h4 class="font-semibold text-lg text-gray-700 pt-2">5. Data Sharing and Disclosure</h4>
+                <p>Your trust is our priority. We do not sell, trade, or rent your personal information to third parties. Your data will only be shared in the following limited scenarios:</p>
+                <ul class="list-disc list-inside pl-4 space-y-1">
+                    <li><strong>With Potential Employers/Course Providers:</strong> With your implicit consent, when we suggest your profile for relevant job vacancies or recommend courses from our partners.</li>
+                    <li><strong>For Legal Compliance:</strong> If required by law, such as in response to a court order, government request, or to establish or exercise our legal rights.</li>
+                </ul>
+
+                <h4 class="font-semibold text-lg text-gray-700 pt-2">6. Data Retention</h4>
+                <p>We will retain your personal data for as long as it is necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law.</p>
+
+                <h4 class="font-semibold text-lg text-gray-700 pt-2">7. Your Rights and Access</h4>
+                <p>You have the right to access, review, modify, and correct any of your personal information that we hold. You may also request the deletion of your account and associated data. For any such requests, please contact our Grievance Officer.</p>
+
+                <h4 class="font-semibold text-lg text-gray-700 pt-2">8. Grievance Officer</h4>
+                <p>In accordance with the Information Technology Act, 2000, and the rules made thereunder, the name and contact details of the Grievance Officer are provided below:</p>
+                <ul class="list-none pl-4">
+                    <li><strong>Name:</strong> [Your Name / Officer's Name]</li>
+                    <li><strong>Email:</strong> [your-grievance-email@example.com]</li>
+                </ul>
+                <p>Please contact our Grievance Officer for any questions or concerns regarding this policy or your data.</p>
+                
+                <h4 class="font-semibold text-lg text-gray-700 pt-2">9. Changes to This Policy</h4>
+                <p>We may update this privacy policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will notify you of any material changes by posting the new policy on this page.</p>
+
+            </div>
+             <!-- Modal Footer -->
+            <div class="flex items-center justify-end p-4 border-t">
+                <button id="modal-accept-btn" class="bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700">I Understand</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JavaScript for Supabase Integration -->
+    <script type="module">
+        // Import the Supabase client library
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+        // --- SUPABASE CREDENTIALS ---
+        const SUPABASE_URL = 'https://szxturkhxlfawivtqfbg.supabase.co'; 
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6eHR1cmtoeGxmYXdpdnRxZmJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYwOTMwODcsImV4cCI6MjA3MTY2OTA4N30.3wL5wDRo3uXKwff4NTRjJRCJ0UdvB8QRYrewnWdjm7Y';
+
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // --- DOM ELEMENTS ---
+        const form = document.getElementById('user-data-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const agreementCheckbox = document.getElementById('agreement-checkbox');
+        const statusMessage = document.getElementById('status-message');
+        const homeButton = document.getElementById('back-to-home');
+        
+        // Modal elements
+        const privacyPolicyLink = document.getElementById('privacy-policy-link');
+        const privacyModal = document.getElementById('privacy-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const modalAcceptBtn = document.getElementById('modal-accept-btn');
+
+        // --- SET YOUR LINKS HERE ---
+        homeButton.href = "https://your-home-page.com"; // <-- Replace with your actual home page URL
+        // The privacy policy link will now open the modal, so no href is needed.
+        
+        // --- MODAL LOGIC ---
+        const openModal = () => {
+            privacyModal.style.display = 'flex';
+        };
+
+        const closeModal = () => {
+            privacyModal.style.display = 'none';
+        };
+
+        privacyPolicyLink.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent link from navigating
+            openModal();
+        });
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modalAcceptBtn.addEventListener('click', closeModal);
+        // Close modal if user clicks outside the content area
+        privacyModal.addEventListener('click', (e) => {
+            if (e.target === privacyModal) {
+                closeModal();
+            }
+        });
+
+
+        // --- EVENT LISTENERS ---
+
+        // Enable/disable the submit button based on the checkbox
+        agreementCheckbox.addEventListener('change', () => {
+            submitBtn.disabled = !agreementCheckbox.checked;
+        });
+
+        // Handle the form submission
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Show a loading state on the button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            statusMessage.textContent = '';
+
+            // Create an object with all the form data
+            const formData = {
+                name: form.name.value,
+                gender: form.gender.value,
+                mobile_number: form.mobile.value,
+                email: form.email.value,
+                current_city: form.city.value,
+                date_of_birth: form.dob.value,
+                percentage_10th: parseFloat(form.percentage_10th.value),
+                percentage_12th: parseFloat(form.percentage_12th.value),
+                currently_pursuing: form.current_pursuing.value,
+                stream_of_education: form.stream.value,
+            };
+
+            // --- SUPABASE INSERT ---
+            // IMPORTANT: Make sure you have a table in Supabase named 'user_profiles'
+            // with columns that match the keys in the 'formData' object.
+            const { data, error } = await supabase
+                .from('user_profiles') // Your table name
+                .insert([formData]);
+
+            if (error) {
+                // If there was an error, show the specific Supabase error message for easier debugging.
+                console.error('Error inserting data:', error);
+                
+                statusMessage.innerHTML = `<p class="text-red-500 font-semibold">An Error Occurred:</p><p class="text-red-500 text-xs mt-1">${error.message}</p>`;
+                
+                submitBtn.disabled = false; // Re-enable the button
+                submitBtn.textContent = 'Submit Details';
+            } else {
+                // If successful, show a success message and reset the form
+                console.log('Data inserted successfully:', data);
+                statusMessage.innerHTML = `<p class="text-green-500">Success! Your details have been saved.</p>`;
+                form.reset(); // Clear all form fields
+                agreementCheckbox.checked = false; // Uncheck the box
+                submitBtn.disabled = true; // Disable the button again
+                submitBtn.textContent = 'Submit Details';
+            }
+        });
+    </script>
+</body>
+</html>
